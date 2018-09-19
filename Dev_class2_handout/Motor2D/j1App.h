@@ -80,6 +80,9 @@ private:
 	// a xml_document to store the while config file and
 	// a xml_node to read specific branches of the xml
 
+	const char* pugi::xml_node;
+	const char* pugi::xml_document;
+
 	int					argc;
 	char**				args;
 };
