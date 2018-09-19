@@ -4,7 +4,8 @@
   <subject>AI</subject>
     <game>Farming Joy</game>
       <type>God Game</type>
-  <mode>fullscreen/>
-    <instance resolution ="1280×800"/>
-  </mode>
+  <window>
+    <height>720</height>
+    <width>1460</width>
+  </window>
 </config>
