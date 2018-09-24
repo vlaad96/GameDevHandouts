@@ -61,22 +61,21 @@ bool j1App::Awake()
 	// If everything goes well, load the top tag inside the xml_node property
 	// created in the last TODO
 
-	pugi::xml_parse_result result = config.load_file("config.xml");
-
-
 	bool ret = true;
 
-	p2List_item<j1Module*>* item;
-	item = modules.start;
+	title.create(config.child("title").child_value());
+	org.create(config.child("organization").child_value());
 
-	while(item != NULL && ret == true)
+	if (ret == true)
 	{
-		// TODO 6: Add a new argument to the Awake method to receive a pointer to a xml node.
-		// If the section with the module name exist in config.xml, fill the pointer with the address of a valid xml_node
-		// that can be used to read all variables from that section. Send nullptr if the section does not exist in config.xml
+		p2List_item<j1Module*>* item;
+		item = modules.start;
 
-		ret = item->data->Awake();
-		item = item->next;
+		while (item != NULL && ret == true)
+		{
+			ret = item->data->Awake(config.child(item->data->name.GetString()));
+			item = item->next;
+		}
 	}
 
 	return ret;
@@ -119,6 +118,7 @@ bool j1App::Update()
 	FinishUpdate();
 	return ret;
 }
+
 
 // ---------------------------------------------
 void j1App::PrepareUpdate()

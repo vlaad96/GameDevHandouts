@@ -152,7 +152,10 @@ void j1App::PrepareUpdate()
 void j1App::FinishUpdate()
 {
 	// TODO 1: This is a good place to call load / Save functions
-
+	bool j1App::LoadGame(const char* file)
+	{
+		bool ret = false;
+	}
 }
 
 // Call modules before each loop iteration

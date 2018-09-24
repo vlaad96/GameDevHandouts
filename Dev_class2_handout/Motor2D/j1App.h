@@ -80,9 +80,12 @@ private:
 	// a xml_document to store the while config file and
 	// a xml_node to read specific branches of the xml
 
-	std::string const XML_FILE_PATH = "C://Documents/GitHub/XMLHandouts/Dev_class2_handout/Game/config.xml";
-	pugi::xml_document config; //Creates a variable named config where the actual file is stored
-	pugi::xml_node  root;
+	pugi::xml_document config_file;
+	pugi::xml_node config;
+	pugi::xml_node app_config;
+
+	p2SString title;
+	p2SString org;
 
 	int					argc;
 	char**				args;

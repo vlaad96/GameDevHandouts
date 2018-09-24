@@ -49,6 +49,9 @@ public:
 	// will one execute by the very end of the frame
 	// Load / Save
 
+	bool LoadGame(const char* file);
+	bool SaveGame(const char* file);
+
 private:
 
 	// Load config file
