@@ -9,7 +9,24 @@
 // TODO 1: Create a struct for the map layer
 // ----------------------------------------------------
 
+struct MapLayer {
+
 	// TODO 6: Short function to get the value of x,y
+
+	inline uint Get(int x, int y) const;
+
+	p2SString name;
+
+	uint width;
+	uint height;
+
+	uint* data = nullptr;
+	uint size = 0;
+
+	~MapLayer();
+};
+
+	
 
 
 
@@ -52,6 +69,7 @@ struct MapData
 	MapTypes			type;
 	p2List<TileSet*>	tilesets;
 	// TODO 2: Add a list/array of layers to the map!
+	p2List<MapLayer*>	layers;
 };
 
 // ----------------------------------------------------
