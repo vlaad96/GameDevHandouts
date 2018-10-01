@@ -33,6 +33,37 @@ void j1Map::Draw()
 
 	// TODO 5: Prepare the loop to draw all tilesets + Blit
 
+	uint tile_index;
+	uint layer_index;
+
+	for (layer_index = 0; layer_index < data.layers.count(); layer_index++) 
+	{
+
+		for (int i = 0; i < data.width; i++)
+		{
+
+			for (int j = 0; j < data.height; j++)
+			{
+
+				uint id = data.layers[layer_index]->data[data.layers[layer_index]->Get(i, j)];
+				if (id != 0) 
+				{
+					for (tile_index = 0; tile_index < data.tilesets.count(); tile_index++)
+					{
+
+						id -= (data.tilesets[tile_index]->firstgid - 1);
+						break;
+					}
+
+					SDL_Rect tile_rect = data.tilesets[tile_index]->GetTileRect(id);
+					int x = MapToWorld(i, j).x;
+					int y = MapToWorld(i, j).y;
+					App->render->Blit(data.tilesets[tile_index]->texture, x, y, &tile_rect);
+				}
+			}
+		}
+	}
+
 		// TODO 9: Complete the draw function
 
 }
@@ -135,7 +166,22 @@ bool j1Map::Load(const char* file_name)
 
 	// TODO 4: Iterate all layers and load each of them
 	// Load layer info ----------------------------------------------
+	pugi::xml_node layer;
 
+	for (layer = map_file.child("map").child("layer"); layer && ret; layer.next_sibling("layer")) 
+	{
+
+		MapLayer* set = new MapLayer();
+
+		if (ret == true) 
+		{
+			
+			ret = LoadLayer(layer, set);
+
+		}
+
+		data.layers.add(set);
+	}
 
 	if(ret == true)
 	{
@@ -156,7 +202,7 @@ bool j1Map::Load(const char* file_name)
 
 		// TODO 4: Add info here about your loaded layers
 		// Adapt this vcode with your own variables
-		/*
+		
 		p2List_item<MapLayer*>* item_layer = data.layers.start;
 		while(item_layer != NULL)
 		{
@@ -165,7 +211,7 @@ bool j1Map::Load(const char* file_name)
 			LOG("name: %s", l->name.GetString());
 			LOG("tile width: %d tile height: %d", l->width, l->height);
 			item_layer = item_layer->next;
-		}*/
+		}
 	}
 
 	map_loaded = ret;
@@ -301,6 +347,33 @@ bool j1Map::LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set)
 }
 
 // TODO 3: Create the definition for a function that loads a single layer
-//bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
-//{
-//}
+bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
+{
+	pugi::xml_node data_node = node.child("data");
+	uint i = 0;
+
+	layer->name = node.attribute("name").as_string;
+	layer->height = node.attribute("height").as_uint(0);
+	layer->width = node.attribute("width").as_uint(0);
+	layer->size = layer->height*layer->width;
+
+	layer->data = new uint[layer->size];
+	memset(layer->data, 0, sizeof(uint)*layer->size);
+
+	for (pugi::xml_node aux = node.child("data").child("title"); aux; aux = aux.next_sibling("title"))
+	{
+		layer->data[++i] = aux.attribute("git").as_uint;
+	}
+	return true;
+}
+
+MapLayer::~MapLayer()
+{
+
+	delete[] data;
+}
+
+inline uint MapLayer::Get(int x, int y)const
+{
+	return x + y * width;
+}
