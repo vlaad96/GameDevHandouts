@@ -60,12 +60,36 @@ void j1Map::Draw()
 					int y = MapToWorld(i, j).y;
 					App->render->Blit(data.tilesets[tile_index]->texture, x, y, &tile_rect);
 				}
+
 			}
+
 		}
+
 	}
 
 		// TODO 9: Complete the draw function
+	// whatever
 
+	MapLayer* layer = data.layers.start->data;
+	TileSet* tileset = data.tilesets.start->data;
+
+	
+	
+	//SDL_Rect rect = { tileset->GetTileRect(gid).x,tileset->GetTileRect(gid).y,tileset->tile_width,tileset->tile_height };
+	for (int j = 0; j < layer->height; ++j)
+	{
+
+		for (int i = 0; i < layer->width; ++i)
+		{
+			uint gid = layer->data[(i*layer->width)+j]; //30
+			SDL_Rect r = tileset->GetTileRect(gid); //gid is 30 in 0, which is {166,100,32,32}
+
+			App->render->Blit(tileset->texture, i*tileset->tile_width, j*tileset->tile_height, &r);
+
+		}
+
+	}
+	
 }
 
 
@@ -352,7 +376,7 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 	pugi::xml_node data_node = node.child("data");
 	uint i = 0;
 
-	layer->name = node.attribute("name").as_string;
+	layer->name = node.attribute("name").as_string();
 	layer->height = node.attribute("height").as_uint(0);
 	layer->width = node.attribute("width").as_uint(0);
 	layer->size = layer->height*layer->width;
@@ -362,7 +386,7 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 
 	for (pugi::xml_node aux = node.child("data").child("title"); aux; aux = aux.next_sibling("title"))
 	{
-		layer->data[++i] = aux.attribute("git").as_uint;
+		layer->data[++i] = aux.attribute("git").as_uint(0);
 	}
 	return true;
 }
