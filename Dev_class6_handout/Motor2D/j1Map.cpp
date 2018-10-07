@@ -40,10 +40,11 @@ void j1Map::Draw()
 
 iPoint j1Map::MapToWorld(int x, int y) const
 {
-	iPoint ret(0,0);
-	// TODO 8(old): Create a method that translates x,y coordinates from map positions to world positions
+	iPoint ret;
 
-	// TODO 1: Add isometric map to world coordinates
+	ret.x = x * data.tile_width;
+	ret.y = y * data.tile_height;
+
 	return ret;
 }
 

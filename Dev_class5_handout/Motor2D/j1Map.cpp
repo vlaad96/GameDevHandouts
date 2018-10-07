@@ -36,60 +36,33 @@ void j1Map::Draw()
 	uint tile_index;
 	uint layer_index;
 
-	for (layer_index = 0; layer_index < data.layers.count(); layer_index++) 
+	for (layer_index = 0; layer_index<data.layers.count(); layer_index++)
 	{
-
-		for (int i = 0; i < data.width; i++)
+		for (int j = 0; j < data.height; j++)
 		{
-
-			for (int j = 0; j < data.height; j++)
+			for (int i = 0; i < data.width; i++)
 			{
-
 				uint id = data.layers[layer_index]->data[data.layers[layer_index]->Get(i, j)];
-				if (id != 0) 
+				if (id != 0)
 				{
 					for (tile_index = 0; tile_index < data.tilesets.count(); tile_index++)
 					{
-
-						id -= (data.tilesets[tile_index]->firstgid - 1);
+						/*if (id >= data.tilesets[tile_indx]->firstgid)
+						{
+						id -= (data.tilesets[tile_indx]->firstgid - 1);
+						break;
+						}*/
 						break;
 					}
-
 					SDL_Rect tile_rect = data.tilesets[tile_index]->GetTileRect(id);
 					int x = MapToWorld(i, j).x;
 					int y = MapToWorld(i, j).y;
 					App->render->Blit(data.tilesets[tile_index]->texture, x, y, &tile_rect);
 				}
-
 			}
-
 		}
-
 	}
 
-		// TODO 9: Complete the draw function
-	// whatever
-
-	MapLayer* layer = data.layers.start->data;
-	TileSet* tileset = data.tilesets.start->data;
-
-	
-	
-	//SDL_Rect rect = { tileset->GetTileRect(gid).x,tileset->GetTileRect(gid).y,tileset->tile_width,tileset->tile_height };
-	for (int j = 0; j < layer->height; ++j)
-	{
-
-		for (int i = 0; i < layer->width; ++i)
-		{
-			uint gid = layer->data[(i*layer->width)+j]; //30
-			SDL_Rect r = tileset->GetTileRect(gid); //gid is 30 in 0, which is {166,100,32,32}
-
-			App->render->Blit(tileset->texture, i*tileset->tile_width, j*tileset->tile_height, &r);
-
-		}
-
-	}
-	
 }
 
 
