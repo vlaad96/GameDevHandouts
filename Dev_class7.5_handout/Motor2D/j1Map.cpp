@@ -47,19 +47,18 @@ void j1Map::PropagateBFS()
 	{
 		frontier.Pop(center);
 		
-		for (int i = -1; i < 2; i += 2)
-		{
-			iPoint vertical_neighbour;
-			iPoint horizontal_neighbour;
+		iPoint vertical_neighbour;
+		iPoint horizontal_neighbour;
 
-			vertical_neighbour.x = center.x;
-			vertical_neighbour.y = center.y + i;
-			horizontal_neighbour.x = center.x + i;
-			horizontal_neighbour.y = center.y;
+		vertical_neighbour.x = center.x + 1;//right
+		vertical_neighbour.y = center.y + 1;//up
+		horizontal_neighbour.x = center.x - 1;//left
+		horizontal_neighbour.y = center.y -1;//down
 
-			neighbours.add(horizontal_neighbour);
-			neighbours.add(vertical_neighbour);
-		}
+		visited.add(center);
+		neighbours.add(horizontal_neighbour);
+		neighbours.add(vertical_neighbour);
+
 	}
 
 	// TODO 2: For each neighbor, if not visited, add it
@@ -75,6 +74,14 @@ void j1Map::PropagateBFS()
 				visited.add(item->data);
 			}
 		}
+	}
+
+	p2List<iPoint> came_from;
+	
+	if(frontier.Count() != 0)
+	{
+
+		
 	}
 }
 
