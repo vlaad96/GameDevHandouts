@@ -31,6 +31,7 @@ void j1Map::ResetBFS()
 {
 	frontier.Clear();
 	visited.clear();
+	origen.clear();
 	frontier.Push(iPoint(19, 4));
 	visited.add(iPoint(19, 4));
 }
@@ -43,21 +44,15 @@ void j1Map::PropagateBFS()
 	p2List<iPoint> neighbours;
 	p2List_item<iPoint>* item;
 
-	if (frontier.Count() != 0)
+	if (frontier.start != nullptr)
 	{
+		center = frontier.GetLast()->data;
 		frontier.Pop(center);
-		
-		iPoint vertical_neighbour;
-		iPoint horizontal_neighbour;
 
-		vertical_neighbour.x = center.x + 1;//right
-		vertical_neighbour.y = center.y + 1;//up
-		horizontal_neighbour.x = center.x - 1;//left
-		horizontal_neighbour.y = center.y -1;//down
-
-		visited.add(center);
-		neighbours.add(horizontal_neighbour);
-		neighbours.add(vertical_neighbour);
+		neighbours.add({ center.x + 1, center.y });
+		neighbours.add({ center.x - 1, center.y });
+		neighbours.add({ center.x, center.y + 1 });
+		neighbours.add({ center.x, center.y - 1 });
 
 	}
 
@@ -66,8 +61,9 @@ void j1Map::PropagateBFS()
 
 	for (item = neighbours.start;item; item = item->next)
 	{
-		if (visited.find(item->data) == -1)
+		if (visited.find(item->data) == -1 && IsWalkable(item->data.x, item->data.y))
 		{
+
 			if (IsWalkable(item->data.x, item->data.y) == true)
 			{
 				frontier.Push(item->data);
@@ -76,13 +72,7 @@ void j1Map::PropagateBFS()
 		}
 	}
 
-	p2List<iPoint> came_from;
 	
-	if(frontier.Count() != 0)
-	{
-
-		
-	}
 }
 
 void j1Map::DrawBFS()
@@ -123,23 +113,33 @@ bool j1Map::IsWalkable(int x, int y) const
 {
 	// TODO 3: return true only if x and y are within map limits
 	// and the tile is walkable (tile id 0 in the navigation layer)
+	bool ret = false;
 
-	p2List_item<MapLayer*>* item;
+	p2List_item<MapLayer*>* layer = nullptr;
 	p2List_item<Properties::Property*>* layer_property;
+	p2List_item<MapLayer*>* item;
 
-	if (x >= 0 && x < data.width && y <= 0 && y < data.height)
+	for (item = data.layers.start; item; item = item->next)
 	{
-		for (item = data.layers.start; item; item = item->next)
+
+		for (layer_property = item->data->properties.list.start; layer_property; layer_property = layer_property->next)
 		{
-			if (item->data->name == "Collisions")
+			if (layer_property->data->name == "Navigation"&& layer_property->data->value == 1)
 			{
-				if (item->data->Get(x, y) == 0)
-					return true;
+				layer = item;
 			}
 		}
 	}
 
-	return false;;
+	if (x >= 0 && x < data.width && y >= 0 && y < data.height)
+	{
+		if (layer->data->Get(x, y) == 0)
+		{
+			ret = true;
+		}
+	}
+
+	return ret;
 }
 
 void j1Map::Draw()
