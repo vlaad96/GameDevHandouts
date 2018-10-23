@@ -71,6 +71,23 @@ void j1Map::PropagateDijkstra()
 	// TODO 3: Taking BFS as a reference, implement the Dijkstra algorithm
 	// use the 2 dimensional array "cost_so_far" to track the accumulated costs
 	// on each cell (is already reset to 0 automatically)
+
+	/*Dijkstra algorithm
+	
+	It has a priority queue that will automatically add the element in the place that it
+	belongs in the queue. It starts same as bfs and adds a variable called cost, which is an integer.
+	you have new_cost, cost_so_far and grap.cost(current, next).
+	graph cost is set to 0 at the beggining as it's the cost the map has before trying to expand and calculate the path.
+	cost_so_far should be -1 if the tile has not been visited.
+	if next not in cost_so_far or new_cost < cost_so_far[next]
+	cost_so_far[next] = new_cost
+	This means that if next in cost_so_far is -1 (haven't been visited),
+	or if the tile has been visited but the new cost of the path is smaller than the cost it calculaated from another path
+	the cost_so_far will be now the new cost, as it is smaller.
+
+	*/
+
+
 }
 
 int j1Map::MovementCost(int x, int y) const
