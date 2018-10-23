@@ -1,12 +1,15 @@
-﻿  j1Map.cpp
-c:\users\vladislavb\documents\github\gamedevhandouts\dev_class7.8_handout\motor2d\j1map.cpp(243): warning C4244: '=': conversion from 'float' to 'TYPE', possible loss of data
-          with
-          [
-              TYPE=int
-          ]
-c:\users\vladislavb\documents\github\gamedevhandouts\dev_class7.8_handout\motor2d\j1map.cpp(244): warning C4244: '=': conversion from 'float' to 'TYPE', possible loss of data
-          with
-          [
-              TYPE=int
-          ]
-  Motor2D.vcxproj -> C:\Users\vladislavb\Documents\GitHub\GameDevHandouts\Dev_class7.8_handout\Debug\Dev Class7.8 Handout.exe
+﻿  pugixml.cpp
+  j1Window.cpp
+  j1Textures.cpp
+  j1Render.cpp
+  p2Log.cpp
+  j1Scene.cpp
+  j1Map.cpp
+c:\users\vlad\documents\github\xmlhandouts\dev_class7.8_handout\motor2d\j1map.cpp(293): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\vlad\documents\github\xmlhandouts\dev_class7.8_handout\motor2d\j1map.cpp(294): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  j1Input.cpp
+  j1Audio.cpp
+  j1App.cpp
+  j1Main.cpp
+  Generating Code...
+  Motor2D.vcxproj -> C:\Users\Vlad\Documents\GitHub\XMLHandouts\Dev_class7.8_handout\Debug\Dev Class7.8 Handout.exe
