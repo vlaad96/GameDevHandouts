@@ -34,6 +34,7 @@ void j1Map::ResetBFS()
 	origen.clear();
 	frontier.Push(iPoint(19, 4));
 	visited.add(iPoint(19, 4));
+	origen.add(iPoint(19, 4));
 }
 
 void j1Map::PropagateBFS()
@@ -73,6 +74,27 @@ void j1Map::PropagateBFS()
 	}
 
 	
+}
+
+void j1Map::Path(int x, int y)
+{
+
+	path.Clear();
+	iPoint final_point;
+	iPoint current_point = final_point;
+
+	if (visited.find(final_point) != -1)
+	{
+		path.Push(current_point);
+
+		if(current_point.operator!=(visited.start->data))
+		{
+
+			current_point = origen.At(visited.find(current_point))->data;
+			path.Push(current_point);
+		}
+	}
+
 }
 
 void j1Map::DrawBFS()
@@ -124,7 +146,7 @@ bool j1Map::IsWalkable(int x, int y) const
 
 		for (layer_property = item->data->properties.list.start; layer_property; layer_property = layer_property->next)
 		{
-			if (layer_property->data->name == "Navigation"&& layer_property->data->value == 1)
+			if (layer_property->data->name == "Navigation" && layer_property->data->value == 1)
 			{
 				layer = item;
 			}

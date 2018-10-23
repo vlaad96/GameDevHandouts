@@ -128,6 +128,7 @@ public:
 	void DrawBFS();
 	bool IsWalkable(int x, int y) const;
 	void ResetBFS();
+	void Path(int x, int y);
 
 private:
 
@@ -153,6 +154,7 @@ private:
 	p2Queue<iPoint>		frontier;
 	p2List<iPoint>		visited;
 	p2List<iPoint>		origen;
+	p2Queue<iPoint>		path;
 
 };
 
