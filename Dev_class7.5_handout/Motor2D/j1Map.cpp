@@ -79,19 +79,19 @@ void j1Map::PropagateBFS()
 void j1Map::Path(int x, int y)
 {
 
-	path.Clear();
+	path.clear();
 	iPoint final_point;
 	iPoint current_point = final_point;
 
 	if (visited.find(final_point) != -1)
 	{
-		path.Push(current_point);
+		path.add(current_point);
 
 		if(current_point.operator!=(visited.start->data))
 		{
 
 			current_point = origen.At(visited.find(current_point))->data;
-			path.Push(current_point);
+			path.add(current_point);
 		}
 	}
 

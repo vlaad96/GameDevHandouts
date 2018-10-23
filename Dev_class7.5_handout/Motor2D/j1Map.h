@@ -154,7 +154,7 @@ private:
 	p2Queue<iPoint>		frontier;
 	p2List<iPoint>		visited;
 	p2List<iPoint>		origen;
-	p2Queue<iPoint>		path;
+	p2List<iPoint>		path;
 
 };
 
