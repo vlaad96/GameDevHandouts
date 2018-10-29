@@ -3,6 +3,7 @@
 #include "j1App.h"
 #include "j1Render.h"
 #include "j1Textures.h"
+#include "j1Input.h"
 #include "j1Map.h"
 #include <math.h>
 
@@ -64,6 +65,47 @@ void j1Map::Path(int x, int y)
 		}
 	}
 
+}
+
+
+void j1Map::PropagateAStar()
+{
+	iPoint curr;
+	int x, y;
+	App->input->GetMousePosition(x, y);
+
+	iPoint goal = App->map->WorldToMap(x - App->render->camera.x, y - App->render->camera.y);
+	
+	while (frontier.Count() != 0 && MovementCost(curr.x, curr.y) != 0) 
+	{
+		if (curr == goal)
+			break;
+	}
+	if (frontier.Pop(curr)) 
+	{
+
+		iPoint neighbors[4];
+		neighbors[0].create(curr.x + 1, curr.y + 0);
+		neighbors[1].create(curr.x + 0, curr.y + 1);
+		neighbors[2].create(curr.x - 1, curr.y + 0);
+		neighbors[3].create(curr.x + 0, curr.y - 1);
+
+		for (uint i = 0; i < 4; ++i)
+		{
+			uint distance = neighbors[i].DistanceTo(goal);
+
+			if (MovementCost(neighbors[i].x, neighbors[i].y) >= 0)
+			{
+				if (breadcrumbs.find(neighbors[i]) == -1 && visited.find(neighbors[i]) == -1)
+				{
+					cost_so_far[neighbors[i].x][neighbors[i].y] = distance;
+					frontier.Push(neighbors[i], distance);
+					visited.add(curr);
+					breadcrumbs.add(curr);
+				}
+			}
+		}
+	}
 }
 
 void j1Map::PropagateDijkstra()

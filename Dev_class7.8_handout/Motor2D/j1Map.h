@@ -136,6 +136,7 @@ public:
 	// Propagation style
 	void PropagateBFS();
 	void PropagateDijkstra();
+	void PropagateAStar();
 
 private:
 
@@ -157,7 +158,7 @@ private:
 	p2SString			folder;
 	bool				map_loaded;
 
-	/// BFS
+	
 	p2PQueue<iPoint>	frontier;
 	p2List<iPoint>		visited;
 	p2List<iPoint>		breadcrumbs;
