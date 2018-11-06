@@ -14,9 +14,14 @@
 #include "j1Pathfinding.h"
 #include "j1App.h"
 
+
 // TODO 3: Measure the amount of ms that takes to execute:
 // App constructor, Awake, Start and CleanUp
 // LOG the result
+
+
+j1Timer timer;
+j1PerfTimer perfTimer;
 
 // Constructor
 j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
@@ -174,7 +179,7 @@ void j1App::FinishUpdate()
 	// Amount of frames during the last second
 
 	float avg_fps = 0.0f;
-	float seconds_since_startup = 0.0f;
+	float seconds_since_startup = timer.ReadSec();
 	float dt = 0.0f;
 	uint32 last_frame_ms = 0;
 	uint32 frames_on_last_update = 0;

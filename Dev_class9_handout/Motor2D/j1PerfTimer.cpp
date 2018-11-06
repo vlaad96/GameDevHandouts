@@ -15,23 +15,26 @@ j1PerfTimer::j1PerfTimer()
 	// they are simple, one line each!
 
 	Start();
+	
 }
 
 // ---------------------------------------------
 void j1PerfTimer::Start()
 {
+	started_at = ReadMs();
+	frequency = ReadTicks();
 }
 
 // ---------------------------------------------
 double j1PerfTimer::ReadMs() const
 {
-	return 0.0;
+	return SDL_GetPerformanceCounter();
 }
 
 // ---------------------------------------------
 uint64 j1PerfTimer::ReadTicks() const
 {
-	return 0;
+	return SDL_GetPerformanceCounter() - started_at / SDL_GetPerformanceFrequency();
 }
 
 
