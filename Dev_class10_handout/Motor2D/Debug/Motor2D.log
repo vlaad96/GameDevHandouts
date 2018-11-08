@@ -1,0 +1,23 @@
+﻿  j1App.cpp
+c:\users\vladislavb\documents\github\gamedevhandouts\dev_class10_handout\motor2d\j1app.cpp(175): warning C4244: '=': conversion from 'uint32' to 'float', possible loss of data
+c:\users\vladislavb\documents\github\gamedevhandouts\dev_class10_handout\motor2d\j1app.cpp(204): warning C4477: 'sprintf_s' : format string '%lu' requires an argument of type 'unsigned long', but variadic argument 5 has type 'uint64'
+  c:\users\vladislavb\documents\github\gamedevhandouts\dev_class10_handout\motor2d\j1app.cpp(204): note: consider using '%llu' in the format string
+  c:\users\vladislavb\documents\github\gamedevhandouts\dev_class10_handout\motor2d\j1app.cpp(204): note: consider using '%I64u' in the format string
+  j1Audio.cpp
+  j1Input.cpp
+  j1Main.cpp
+  j1Map.cpp
+c:\users\vladislavb\documents\github\gamedevhandouts\dev_class10_handout\motor2d\j1map.cpp(106): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\vladislavb\documents\github\gamedevhandouts\dev_class10_handout\motor2d\j1map.cpp(107): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  j1Pathfinding.cpp
+c:\users\vladislavb\documents\github\gamedevhandouts\dev_class10_handout\motor2d\p2point.h(114): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  c:\users\vladislavb\documents\github\gamedevhandouts\dev_class10_handout\motor2d\p2point.h(110): note: while compiling class template member function 'int p2Point<int>::DistanceTo(const p2Point<int> &) const'
+  c:\users\vladislavb\documents\github\gamedevhandouts\dev_class10_handout\motor2d\j1pathfinding.cpp(160): note: see reference to function template instantiation 'int p2Point<int>::DistanceTo(const p2Point<int> &) const' being compiled
+  c:\users\vladislavb\documents\github\gamedevhandouts\dev_class10_handout\motor2d\j1pathfinding.h(81): note: see reference to class template instantiation 'p2Point<int>' being compiled
+c:\users\vladislavb\documents\github\gamedevhandouts\dev_class10_handout\motor2d\p2point.h(114): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+  j1Render.cpp
+  j1Scene.cpp
+  j1Textures.cpp
+  j1Window.cpp
+  Generating Code...
+  Motor2D.vcxproj -> C:\Users\vladislavb\Documents\GitHub\GameDevHandouts\Dev_class10_handout\Debug\Development - Class 10.exe
