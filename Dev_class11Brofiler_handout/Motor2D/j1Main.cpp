@@ -3,6 +3,7 @@
 #include "p2Defs.h"
 #include "p2Log.h"
 #include "j1App.h"
+#include "Brofiler/Brofiler.h"
 
 // This is needed here because SDL redefines main function
 // do not add any other libraries here, instead put them in their modules
@@ -11,6 +12,8 @@
 #pragma comment( lib, "SDL/libx86/SDL2main.lib" )
 
 // TODO 1: Include the header and load the library for Brofiler
+#pragma comment ( lib, "Brofiler/ProfilerCore32.lib" )
+
 
 
 enum MainState
@@ -84,6 +87,8 @@ int main(int argc, char* args[])
 			case LOOP:
 			{
 				// TODO 2: Add the Brofiler Macro to trigger a frame
+
+				BROFILER_FRAME("frameName")
 
 				if (App->Update() == false)
 					state = CLEAN;
